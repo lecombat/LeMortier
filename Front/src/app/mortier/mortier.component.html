@@ -1,0 +1,21 @@
+<h1>Mortier</h1>
+
+<table id="mortierTable" class="table table-striped" cellspacing="0" width="100%">
+	<thead>
+		<tr>
+			<th>Libélle Dépense</th>
+			<th>Financeur</th>
+			<th>Coût</th>
+			<th>Détail</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr *ngFor="let depense of mortier.depenses">
+			<td>{{depense.libelle}}</td>
+			<td>{{depense.financeur}}</td>
+			<td>{{depense.cout}}</td>
+			<td>{{depense.details}}</td>
+		</tr>
+	</tbody>
+</table>   
+

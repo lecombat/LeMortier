@@ -1,0 +1,16 @@
+<div class="wrapper">
+	<form class="form-signin" (ngSubmit)="onSubmit()">       
+	  <h2 class="clean-font">Inscription</h2>
+	  <label>User</label>
+	  <input type="text" class="form-control" name="username" [(ngModel)]="username" placeholder="Username" required autofocus="" />
+	  <br/>
+	  <label>password</label>
+	  <input type="password" class="form-control" name="password" [(ngModel)]="password" placeholder="password" required autofocus="" />
+	  <br/>
+	  <label>email</label>
+	  <input type="text" class="form-control" name="password" [(ngModel)]="email" placeholder="email" autofocus="" />
+	  <br />    
+	  <button class="btn btn-primary btn-block" type="submit">Inscription</button>   
+	</form>
+	
+</div>

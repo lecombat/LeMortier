@@ -1,0 +1,29 @@
+<h1>Mortiers</h1>
+
+<table id="mortiersTable" class="table table-striped" cellspacing="0" width="100%">
+	<thead>
+		<tr>
+			<th>Libélle</th>
+			<th>Nombre de participants</th>
+			<th>Statut</th>
+			<th>Coût</th>
+			<th>Date de cloture</th>
+			<th>Détails</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr *ngFor="let mortier of mortierList">
+			<td> <a (click)="onSelectMortier(mortier)">{{mortier.nom}}</a></td>
+			<td>{{mortier.nombreParticipants}}</td>
+			<td>{{mortier.statut}}</td>
+			<td>{{mortier.cout}}</td>
+			<td>{{mortier.dateCloture}}</td>
+			<td><a (click)="onSelectMortier(mortier)"></a></td>
+		</tr>
+	</tbody>
+</table>
+<hr/>
+<div>
+	<a [routerLink]="['/mortier/create']">Creer un Mortier</a>
+</div>   
+
