@@ -20,18 +20,13 @@ export class CreateMortierComponent implements OnInit {
 
   private listParticipants: Array<User>;
 
-  private listParticipantsMortier: Array<User> = [];
+  private listParticipantsMortier: Array<any> = [];
 
-  private newParticipant: User;
-
-  private inputId: number = 0;
+  private newParticipant: any = {};
 
   addFieldValue() {
     this.listParticipantsMortier.push(this.newParticipant);
-    this.inputId++;
-    alert(JSON.stringify(this.newParticipant));
-    this.newParticipant = new User();
-    alert(JSON.stringify(this.newParticipant));
+    this.newParticipant = {};
   }
 
   deleteFieldValue(index) {
