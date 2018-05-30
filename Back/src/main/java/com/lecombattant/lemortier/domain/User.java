@@ -42,7 +42,7 @@ public class User implements UserDetails {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="user_Id", nullable=false, updatable=false)
+	@Column(name="user_id", nullable=false, updatable=false)
 	private Long id;
 	
 	/**
@@ -101,6 +101,7 @@ public class User implements UserDetails {
 	/**
 	 * @return the username
 	 */
+	@JsonIgnore
 	public String getUsername() {
 		return username;
 	}
@@ -164,6 +165,7 @@ public class User implements UserDetails {
 
 	@Override
 	@Transactional
+	@JsonIgnore
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		Set<GrantedAuthority> authorities = new HashSet<>();
         userRoles.forEach(ur -> authorities.add(new Authority(ur.getRole().getName())));
@@ -171,18 +173,21 @@ public class User implements UserDetails {
 	}
 
 	@Override
+	@JsonIgnore
 	public boolean isAccountNonExpired() {
 		// TODO Auto-generated method stub
 		return true;
 	}
 
 	@Override
+	@JsonIgnore
 	public boolean isAccountNonLocked() {
 		// TODO Auto-generated method stub
 		return true;
 	}
 
 	@Override
+	@JsonIgnore
 	public boolean isCredentialsNonExpired() {
 		// TODO Auto-generated method stub
 		return true;

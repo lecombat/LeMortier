@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.lecombattant.lemortier.dao.MortierDao;
 import com.lecombattant.lemortier.domain.Depense;
@@ -19,6 +20,7 @@ import com.lecombattant.lemortier.service.MortierService;
  *
  */
 @Service
+@Transactional(rollbackFor=java.sql.SQLException.class)
 public class MortierServiceImpl implements MortierService {
 
 	@Autowired

@@ -14,23 +14,22 @@
     <tbody>
         <tr *ngFor="let participant of listParticipantsMortier; let i = index">
             <td>
-                <input id="participant" [(ngModel)]="participant.username" class="form-control" type="text" name="{{participant.username}}"
+                <input id="participant" [(ngModel)]="participant.user" class="form-control" type="text" name="{{participant}}"
                 [ngModelOptions]="{standalone: true}"
                 [resultFormatter]="formatMatches"
 		        [inputFormatter]="formatMatches"
-		    	[ngbTypeahead]="search"/>
-            </td>
+		    	[ngbTypeahead]="search"/> <!-- Add read only in input text -->
             <td>
                 <button class="btn btn-default"  type="button" (click)="deleteFieldValue(i)">Delete</button>
             </td>
         </tr>
         <tr>
             <td>
-                <input id="participant" class="form-control" type="text" [(ngModel)]="newParticipant.username" name="{{newParticipant.username}}"
+                <input id="participant" class="form-control" type="text" [(ngModel)]="newParticipant.user" name="{{newParticipant}}"
                 [ngModelOptions]="{standalone: true}"
                 [resultFormatter]="formatMatches"
 		        [inputFormatter]="formatMatches"
-		    	[ngbTypeahead]="search"/>
+		    	[ngbTypeahead]="search"/> <!-- Add read only in input text -->
             </td>
             <td>
                 <button class="btn btn-default" type="button" (click)="addFieldValue()">Add</button>

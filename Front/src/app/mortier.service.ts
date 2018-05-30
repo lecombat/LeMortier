@@ -6,11 +6,16 @@ export class MortierService {
 
   constructor(private http: Http) { }
 
-  create(mortier) {
+  create(nom: string, ownerUserId: string, users:string) {
     let url = "/server/api/mortier/create";
+
+    //console.log(users);
     
     console.log('Appel du service de creation du mortier');
-    return this.http.post(url, mortier);
+    let body = {nom: nom, ownerUserId: ownerUserId, users: users};
+    console.log(JSON.stringify(body));
+
+    return this.http.post(url, body);
   }
 
   getMortiers(userId : string){

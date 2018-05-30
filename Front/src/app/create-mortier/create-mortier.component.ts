@@ -24,6 +24,8 @@ export class CreateMortierComponent implements OnInit {
 
   private newParticipant: any = {};
 
+  private users;
+
   addFieldValue() {
     this.listParticipantsMortier.push(this.newParticipant);
     this.newParticipant = {};
@@ -52,7 +54,9 @@ export class CreateMortierComponent implements OnInit {
     );
 
   onSubmit(){
-  	this.mortierService.create({nom: this.nom, ownerUserId: this.userId, users: this.listParticipantsMortier}).subscribe(
+    this.users = this.listParticipantsMortier.map(x => x.user);
+
+  	this.mortierService.create(this.nom, this.userId, JSON.stringify(this.users)).subscribe(
 	      res => {
           this.router.navigateByUrl('/mortiers');
 	      },

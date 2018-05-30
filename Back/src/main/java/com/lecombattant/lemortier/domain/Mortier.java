@@ -3,6 +3,7 @@
  */
 package com.lecombattant.lemortier.domain;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -26,11 +27,16 @@ import com.lecombattant.lemortier.constantes.Constantes;
  *
  */
 @Entity
-public class Mortier {
+public class Mortier implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="mortier_Id", nullable=false, updatable=false)
+	@Column(name="mortier_id", nullable=false, updatable=false)
 	private Long id;
 	
 	@Column(nullable=false)

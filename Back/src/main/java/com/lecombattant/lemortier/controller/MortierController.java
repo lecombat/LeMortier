@@ -47,7 +47,7 @@ public class MortierController {
 		}else if (pMortier.getOwnerUserId() == null || userService.findUserById(pMortier.getOwnerUserId()) == null){ //TODO contrainte de clé secondaire
 			return new ResponseEntity<Mortier>(HttpStatus.NOT_FOUND);
 		}else {
-			return new ResponseEntity<Mortier>(mortierService.create(pMortier), HttpStatus.OK);
+			return new ResponseEntity<Mortier>(mortierService.create(pMortier), HttpStatus.OK); //TODO rollback en cas d'exception
 		}
 		
 	}
