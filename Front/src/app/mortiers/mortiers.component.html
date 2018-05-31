@@ -8,17 +8,15 @@
 			<th>Statut</th>
 			<th>Coût</th>
 			<th>Date de cloture</th>
-			<th>Détails</th>
 		</tr>
 	</thead>
 	<tbody>
 		<tr *ngFor="let mortier of mortierList">
-			<td> <a (click)="onSelectMortier(mortier)">{{mortier.nom}}</a></td>
+			<td> <a (click)="onSelectMortier(mortier.id)">{{mortier.nom}}</a></td>
 			<td>{{mortier.nombreParticipants}}</td>
 			<td>{{mortier.statut}}</td>
 			<td>{{mortier.cout}}</td>
 			<td>{{mortier.dateCloture}}</td>
-			<td><a (click)="onSelectMortier(mortier)"></a></td>
 		</tr>
 	</tbody>
 </table>

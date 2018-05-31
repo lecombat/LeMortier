@@ -66,4 +66,20 @@ public class MortierController {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}		
 	}
+	
+	
+	/**
+	 * Retrieve mortier with id 
+	 * @return
+	 */
+	@GetMapping(path = "/{mortier_id}", produces = "application/json")
+	public ResponseEntity<Mortier> getMortier(@PathVariable("mortier_id") Long pMortierId){	
+		Mortier vMortier = mortierService.getMortier(pMortierId);
+		
+		if(vMortier != null) {
+			return new ResponseEntity<Mortier>(vMortier, HttpStatus.OK);
+		}else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}		
+	}
 }

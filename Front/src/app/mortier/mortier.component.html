@@ -1,4 +1,4 @@
-<h1>Mortier</h1>
+<h1>{{mortier.nom}}</h1>
 
 <table id="mortierTable" class="table table-striped" cellspacing="0" width="100%">
 	<thead>
@@ -10,7 +10,7 @@
 		</tr>
 	</thead>
 	<tbody>
-		<tr *ngFor="let depense of mortier.depenses">
+		<tr *ngFor="let depense of depenseList">
 			<td>{{depense.libelle}}</td>
 			<td>{{depense.financeur}}</td>
 			<td>{{depense.cout}}</td>

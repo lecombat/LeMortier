@@ -27,8 +27,8 @@ getMortiers(userId: string) {
 	)
 }
 
-onSelectMortier(mortier: Object){
-	this.router.navigate(['/mortier', mortier]);
+onSelectMortier(mortierId: number){
+	this.router.navigate(['/mortier', mortierId]);
 }
 
 ngOnInit() {

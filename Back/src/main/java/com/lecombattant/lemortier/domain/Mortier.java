@@ -20,6 +20,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.lecombattant.lemortier.constantes.Constantes;
 
 /**
@@ -55,12 +56,15 @@ public class Mortier implements Serializable{
 	private Date dateCreation = new Date();
 	
 	
-	@ManyToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	@ManyToMany(cascade=CascadeType.MERGE, fetch=FetchType.LAZY)
 	@JoinTable(
 			name="mortier_users", 
 			joinColumns={@JoinColumn(name="mortier_id")}, 
 			inverseJoinColumns={@JoinColumn(name="user_id")})
-	private List<User> users; //TODO transformer les LIST en SET pour les annotations @ManyToMany
+	@JsonIgnoreProperties("mortiers")
+	private List<User> users; 
+	//TODO transformer les LIST en SET pour les annotations @ManyToMany
+	//TODO ajouter les contraintes de cles
 	
 	@OneToMany(mappedBy="mortier", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 	private List<Depense> depenses;

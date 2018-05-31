@@ -25,4 +25,6 @@ public interface MortierService {
 	public boolean checkIfMortierNameExist(String pName);
 
 	public List<Mortier> getMortiersForUser(User pUser);
+	
+	public Mortier getMortier(Long pMortier);
 }

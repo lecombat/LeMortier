@@ -22,16 +22,16 @@ const appRoutes: Routes = [
     component: SignupComponent
   },
   {
-  	path: 'mortier',
-  	component: MortierComponent
-  },
-  {
     path: 'mortiers',
     component: MortiersComponent
   },
   {
     path: 'mortier/create',
     component: CreateMortierComponent
+  },
+  {
+    path: 'mortier/:mortierId',
+    component: MortierComponent
   },
 ];
 

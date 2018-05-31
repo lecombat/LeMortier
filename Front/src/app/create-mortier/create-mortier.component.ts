@@ -56,7 +56,7 @@ export class CreateMortierComponent implements OnInit {
   onSubmit(){
     this.users = this.listParticipantsMortier.map(x => x.user);
 
-  	this.mortierService.create(this.nom, this.userId, JSON.stringify(this.users)).subscribe(
+  	this.mortierService.create(this.nom, this.userId, this.users).subscribe(
 	      res => {
           this.router.navigateByUrl('/mortiers');
 	      },

@@ -66,6 +66,11 @@ public class MortierServiceImpl implements MortierService {
 		
 		return (List<Mortier>) mortierDao.findByOwnerUserId(pUser.getId());
 	}
+
+	@Override
+	public Mortier getMortier(Long pMortierId) {
+		return mortierDao.findOne(pMortierId);
+	}
 		
 
 }
