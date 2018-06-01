@@ -5,6 +5,7 @@ package com.lecombattant.lemortier.domain;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -30,14 +31,14 @@ public class Depense {
 	@Column(nullable=false)
 	private String nom;
 	
-	@OneToOne
+	@OneToOne(cascade=CascadeType.MERGE)
 	private User financeur; //TODO plus tard plusieurs personne pourront financer une seule depense
 	
 	@Column(nullable=false)
 	private Double cout;
 	
 	@Column(nullable=false)
-	private Date dateCreation;
+	private Date dateCreation = new Date();
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="mortier_id")

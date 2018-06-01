@@ -35,13 +35,12 @@ public class MortierServiceImpl implements MortierService {
 	}
 
 	@Override
-	public Mortier addDepense(Long pIdMortier, Depense pDepense) {
-		Mortier vMortier = mortierDao.findOne(pIdMortier);
-		if(vMortier != null){
-			vMortier.getDepenses().add(pDepense);
-		}
-		//TODO gestion d'exception
-		return vMortier;
+	public Mortier addDepenses(Mortier pMortier, List<Depense> pListDepenses) {
+		pMortier.getDepenses().addAll(pListDepenses); //TODO Verifier que les depenses sont differente avant d'inserer
+		
+		mortierDao.save(pMortier);
+		
+		return pMortier;
 	}
 
 	@Override

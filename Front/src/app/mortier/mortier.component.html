@@ -1,21 +1,58 @@
-<h1>{{mortier.nom}}</h1>
+<div class="wrapper">
+<h1>Mon mortier {{mortier.nom}}</h1>
 
-<table id="mortierTable" class="table table-striped" cellspacing="0" width="100%">
-	<thead>
-		<tr>
-			<th>Libélle Dépense</th>
-			<th>Financeur</th>
-			<th>Coût</th>
-			<th>Détail</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr *ngFor="let depense of depenseList">
-			<td>{{depense.libelle}}</td>
-			<td>{{depense.financeur}}</td>
-			<td>{{depense.cout}}</td>
-			<td>{{depense.details}}</td>
-		</tr>
-	</tbody>
-</table>   
+<form class="form-create-mortier" (ngSubmit)="onSubmit()">
+	<table class="table table-striped table-bordered">
+	    <thead>
+	        <tr>
+	            <th>Libélle Dépense</th>
+	            <th>Financeur</th>
+	            <th>Coût (en Euros)</th>
+	            <th>Action</th>
+	        </tr>
+	    </thead>
+	    <tbody>
+	        <tr *ngFor="let depense of depenseList; let i = index">
+	            <td>
+	                <input [(ngModel)]="depense.nom" class="form-control" type="text" name="{{depense.nom}}"/>
+	            </td>
+	            <td>
+	                <input [(ngModel)]="depense.financeur" class="form-control" type="text" name="{{depense.financeur}}" 
+	                [ngModelOptions]="{standalone: true}"
+	                [resultFormatter]="formatMatches"
+			        [inputFormatter]="formatMatches"
+			    	[ngbTypeahead]="search"/> <!-- Add read only in input text -->
+	            </td>
+	            <td>
+	                <input [(ngModel)]="depense.cout" class="form-control" type="text" name="{{depense.cout}}" />
+	            </td>
+	            <td>
+	                <button class="btn btn-default"  type="button" (click)="deleteFieldValue(i)">Delete</button>
+	            </td>
+	        </tr>
+	        <tr>
+	            <td>
+	                <input class="form-control" type="text" id="newAttributeNom" [(ngModel)]="newDepense.nom" name="newAttributeNom" />
+	            </td>
+	            <td>
+	                <input class="form-control" type="text" id="newAttributeFinanceur" [(ngModel)]="newDepense.financeur" name="newAttributeFinanceur" 
+	                [ngModelOptions]="{standalone: true}"
+	                [resultFormatter]="formatMatches"
+			        [inputFormatter]="formatMatches"
+			    	[ngbTypeahead]="search"/> <!-- Add read only in input text -->
+	            </td>
+	            <td>
+	                <input class="form-control" type="text" id="newAttributeCout" [(ngModel)]="newDepense.cout" name="newAttributeCout" />
+	            </td>
+	            <td>
+	                <button class="btn btn-default" type="button" (click)="addFieldValue()">Add</button>
+	            </td>
+	        </tr>
+	    </tbody>
+	</table>
+	<br />
 
+	<button class="btn btn-primary btn-block" type="submit">Ajouter</button>   
+</form>
+
+</div>

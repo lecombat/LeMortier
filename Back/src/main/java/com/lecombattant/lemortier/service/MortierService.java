@@ -18,7 +18,7 @@ public interface MortierService {
 
 	public Mortier create(Mortier pName);
 	
-	public Mortier addDepense(Long pIdMortier, Depense pDepense);
+	public Mortier addDepenses(Mortier pMortier, List<Depense> pListDepenses);
 	
 	public Mortier addParticipant(Long pIdMortier, User pParticipant);
 	

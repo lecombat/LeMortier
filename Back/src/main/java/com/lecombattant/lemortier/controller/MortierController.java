@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.lecombattant.lemortier.domain.Depense;
 import com.lecombattant.lemortier.domain.Mortier;
 import com.lecombattant.lemortier.domain.User;
 import com.lecombattant.lemortier.service.MortierService;
@@ -47,7 +48,7 @@ public class MortierController {
 		}else if (pMortier.getOwnerUserId() == null || userService.findUserById(pMortier.getOwnerUserId()) == null){ //TODO contrainte de clé secondaire
 			return new ResponseEntity<Mortier>(HttpStatus.NOT_FOUND);
 		}else {
-			return new ResponseEntity<Mortier>(mortierService.create(pMortier), HttpStatus.OK); //TODO rollback en cas d'exception
+			return new ResponseEntity<Mortier>(mortierService.create(pMortier), HttpStatus.OK); //TODO rollback en cas d'exception, TODO check user all users exist
 		}
 		
 	}
@@ -81,5 +82,21 @@ public class MortierController {
 		}else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}		
+	}
+	
+	/**
+	 * Ajout des Depenses à un mortier
+	 * @param pMortier
+	 * @return
+	 */
+	@PostMapping(path = "/addDepenses/{mortier_id}", consumes = "application/json", produces = "application/json")
+	public ResponseEntity<Mortier> addDepenses(@PathVariable("mortier_id") Long pMortierId, @RequestBody List<Depense> pListDepenses){
+		Mortier vMortier = mortierService.getMortier(pMortierId);
+		if( vMortier== null){
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}else {
+			return new ResponseEntity<Mortier>(mortierService.addDepenses(vMortier, pListDepenses), HttpStatus.OK); //TODO rollback en cas d'exception, TODO check user all users exist
+		}
+		
 	}
 }

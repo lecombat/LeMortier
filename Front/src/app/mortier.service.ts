@@ -29,5 +29,15 @@ export class MortierService {
     return this.http.get(url, { withCredentials: false });
   }
 
+  /**
+  * Ajout de(s) depense(s)
+  *
+  */
+  addDepenses(mortierId: number, depenses: Array<any>){
+    let url = "/server/api/mortier/addDepenses/"+mortierId;
+    console.log(depenses);
+    return this.http.post(url, depenses);
+  }
+
 }
 	
