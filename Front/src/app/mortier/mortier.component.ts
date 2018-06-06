@@ -23,7 +23,7 @@ export class MortierComponent implements OnInit {
   private newDepense: any = {};
 
   constructor(private route: ActivatedRoute, private mortierService: MortierService, private userService: UserService, private router: Router) {
-    this.getUsers();
+    this.getUsers(); //TODO put this in the cache
 		this.route.params.forEach((params: Params) => {
      		this.mortierId = params['mortierId'];
 		});
@@ -37,7 +37,9 @@ export class MortierComponent implements OnInit {
             this.mortier = JSON.parse(JSON.parse(JSON.stringify(res))._body);
             console.log(this.mortier);
             console.log(this.mortier.depenses);
-            this.depenseList = this.mortier.depenses;
+            if( this.mortier.depenses !== undefined){
+              this.depenseList = this.mortier.depenses;
+            }
           },
         err => {
           console.log("Erreur lors de la recherche du mortier");
@@ -86,7 +88,7 @@ export class MortierComponent implements OnInit {
   onSubmit(){
     this.mortierService.addDepenses(this.mortierId, this.depenseList).subscribe(
       res => {
-        alert("Les depenses ont bien été rajouté au mortier");
+        alert("Les depenses ont bien été rajouté et/ou Maj au mortier");
         this.router.navigateByUrl('/mortiers');
         },
         err =>{

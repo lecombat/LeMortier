@@ -25,6 +25,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.lecombattant.lemortier.domain.security.Authority;
 import com.lecombattant.lemortier.domain.security.UserRole;
 
@@ -54,7 +55,6 @@ public class User implements UserDetails {
 	/**
 	 * Password
 	 */
-	@JsonIgnore
 	private String password;
 	
 	/**
@@ -68,7 +68,7 @@ public class User implements UserDetails {
 	private List<UserRole> userRoles;
 	
 	@ManyToMany(mappedBy="users", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JsonIgnoreProperties("users")
+	@JsonIgnoreProperties({"users", "depenses"})
 	private List<Mortier> mortiers;
 	
 	/**
@@ -118,6 +118,7 @@ public class User implements UserDetails {
 	/**
 	 * @return the password
 	 */
+	@JsonIgnore
 	public String getPassword() {
 		return password;
 	}
@@ -125,6 +126,7 @@ public class User implements UserDetails {
 	/**
 	 * @param password the password to set
 	 */
+	@JsonProperty
 	public void setPassword(String password) {
 		this.password = password;
 	}

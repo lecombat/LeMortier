@@ -30,7 +30,7 @@ export class SignupComponent implements OnInit {
 	      },
 
 	      err => {
-	      	alert("Erreur lors de la creation du user :"+this.username);
+	      	alert("Erreur lors de la creation du user :"+this.username); //TODO erreur selon le statut code de la requete
 	      	console.log(err);
 	      	console.error('Erreur lors de la creation de compte'); //TODO gestion des differents type d'erreurs
 	      }

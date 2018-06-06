@@ -60,7 +60,11 @@ export class CreateMortierComponent implements OnInit {
 	      res => {
           this.router.navigateByUrl('/mortiers');
 	      },
-	      err => console.log(err)
+        
+	      err => {
+          console.log(err)
+          alert("Erreur la de la creation du mortier "+this.nom);
+        }
 	    );
   }
 

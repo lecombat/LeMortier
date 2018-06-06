@@ -5,8 +5,9 @@ package com.lecombattant.lemortier.domain;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.LinkedList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -62,12 +63,13 @@ public class Mortier implements Serializable{
 			joinColumns={@JoinColumn(name="mortier_id")}, 
 			inverseJoinColumns={@JoinColumn(name="user_id")})
 	@JsonIgnoreProperties("mortiers")
-	private List<User> users; 
+	private Set<User> users; 
 	//TODO transformer les LIST en SET pour les annotations @ManyToMany
 	//TODO ajouter les contraintes de cles
 	
-	@OneToMany(mappedBy="mortier", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
-	private List<Depense> depenses;
+	@OneToMany(mappedBy="mortier", cascade=CascadeType.MERGE, fetch=FetchType.LAZY) //TODO , orphanRemoval = true
+	@JsonIgnoreProperties("mortier")
+	private Set<Depense> depenses;
 	
 	/**
 	 * Createur du mortier
@@ -80,10 +82,35 @@ public class Mortier implements Serializable{
 	public Mortier(String pName) {
 		this.nom = pName;
 		this.dateCreation = new Date();
-		this.depenses = new LinkedList<Depense>();
-		this.users = new LinkedList<User>();
+		this.depenses = new HashSet<Depense>();
+		this.users = new HashSet<User>();
 		this.statut = Constantes.STATUT_CREATE;
 		this.cout = new Double(0);
+	}
+	
+	/**
+	 * Ajout d'un depense dans le mortier
+	 * @param pDepense
+	 */
+	public void addDepense(Depense pDepense) {
+		if(this.depenses.contains(pDepense)) {
+			this.depenses.remove(pDepense);
+			pDepense.setMortier(this);
+			this.depenses.add(pDepense);
+		}else {
+			this.depenses.add(pDepense);
+			pDepense.setMortier(this);
+		}
+	}
+	
+	/**
+	 * Ajout d'un depense dans le mortier
+	 * @param pDepense
+	 */
+	public void addDepenses(List<Depense> pDepenses) {
+		for(Depense vDepense : pDepenses) {
+			this.addDepense(vDepense);
+		}
 	}
 	
 	/**
@@ -173,29 +200,29 @@ public class Mortier implements Serializable{
 	/**
 	 * @return the participants
 	 */
-	public List<User> getUsers() {
+	public Set<User> getUsers() {
 		return users;
 	}
 
 	/**
 	 * @param participants the participants to set
 	 */
-	public void setUsers(List<User> pUsers) {
+	public void setUsers(Set<User> pUsers) {
 		this.users = pUsers;
 	}
 
 	/**
 	 * @return the depenses
 	 */
-	public List<Depense> getDepenses() {
+	public Set<Depense> getDepenses() {
 		return depenses;
 	}
 
 	/**
 	 * @param depenses the depenses to set
 	 */
-	public void setDepenses(List<Depense> depenses) {
-		this.depenses = depenses;
+	public void setDepenses(Set<Depense> pDepenses) {
+		this.depenses = pDepenses;
 	}
 
 	/**

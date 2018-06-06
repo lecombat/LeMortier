@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.lecombattant.lemortier.dao.DepenseDao;
 import com.lecombattant.lemortier.dao.MortierDao;
 import com.lecombattant.lemortier.domain.Depense;
 import com.lecombattant.lemortier.domain.Mortier;
@@ -26,6 +27,9 @@ public class MortierServiceImpl implements MortierService {
 	@Autowired
 	private MortierDao mortierDao;
 	
+	@Autowired
+	private DepenseDao depenseDao;
+	
 	@Override
 	public Mortier create(Mortier pMortier) {
 		
@@ -36,9 +40,10 @@ public class MortierServiceImpl implements MortierService {
 
 	@Override
 	public Mortier addDepenses(Mortier pMortier, List<Depense> pListDepenses) {
-		pMortier.getDepenses().addAll(pListDepenses); //TODO Verifier que les depenses sont differente avant d'inserer
 		
-		mortierDao.save(pMortier);
+		pMortier.addDepenses(pListDepenses); //TODO Verifier que les depenses sont differente avant d'inserer
+		
+		depenseDao.save(pListDepenses);
 		
 		return pMortier;
 	}
