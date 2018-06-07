@@ -93,14 +93,8 @@ public class Mortier implements Serializable{
 	 * @param pDepense
 	 */
 	public void addDepense(Depense pDepense) {
-		if(this.depenses.contains(pDepense)) {
-			this.depenses.remove(pDepense);
-			pDepense.setMortier(this);
-			this.depenses.add(pDepense);
-		}else {
-			this.depenses.add(pDepense);
-			pDepense.setMortier(this);
-		}
+		this.depenses.add(pDepense);
+		pDepense.setMortier(this);
 	}
 	
 	/**

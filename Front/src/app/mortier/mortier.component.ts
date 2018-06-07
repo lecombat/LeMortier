@@ -22,6 +22,9 @@ export class MortierComponent implements OnInit {
   private depenseList: Array<any> = [];
   private newDepense: any = {};
 
+  private buttonEnregistrer: string = "ENREGISTRER";
+  private buttonCloturer: string = "CLOTURER";
+
   constructor(private route: ActivatedRoute, private mortierService: MortierService, private userService: UserService, private router: Router) {
     this.getUsers(); //TODO put this in the cache
 		this.route.params.forEach((params: Params) => {
